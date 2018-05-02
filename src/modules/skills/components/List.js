@@ -30,7 +30,7 @@ class List extends Component {
   };
 
   componentDidMount() {
-    HTTP.get('').then(response => this.setState({ data: response.data }));
+    HTTP.getItems().then(response => this.setState({ data: response.data }));
   }
 
   handleTextField = e => this.setState({ filter: e.target.value });

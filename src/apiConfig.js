@@ -1,27 +1,23 @@
 import axios from 'axios';
 
 // authentication token is set globally in App.js during login process
-const axiosInstance = axios.create({
-  baseURL: 'https://react-pgs-workshop.firebaseio.com/',
-});
+const axiosInstance = axios.create({});
 
-class HTTP {
-  static get(url = '') {
-    return axiosInstance.get(`${url}.json`);
-  }
-  static post(url = '', data) {
-    return axiosInstance.post(`${url}.json`, data);
-  }
-  static put(url = '', data) {
-    return axiosInstance.put(`${url}.json`, data);
-  }
-  static delete(url = '') {
-    return axiosInstance.delete(`${url}.json`);
-  }
-  static setDefaults(uid, token) {
-    axiosInstance.defaults.baseURL = `https://react-pgs-workshop.firebaseio.com/${uid}`;
-    axiosInstance.defaults.params = { auth: token };
-  }
-}
+const urlTransform = (id = '') => `${id}.json`;
 
-export default HTTP;
+const getItems = () => axiosInstance.get(urlTransform());
+
+const getItem = id => axiosInstance.get(urlTransform(id));
+
+const postItem = data => axiosInstance.post(urlTransform(), data);
+
+const editItem = (id, data) => axiosInstance.put(urlTransform(id), data);
+
+const deleteItem = id => axiosInstance.put(urlTransform(id));
+
+const setDefaults = (uid, token) => {
+  axiosInstance.defaults.baseURL = `https://react-pgs-workshop.firebaseio.com/${uid}`;
+  axiosInstance.defaults.params = { auth: token };
+};
+
+export default { getItems, getItem, postItem, editItem, deleteItem, setDefaults };

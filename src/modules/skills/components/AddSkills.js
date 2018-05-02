@@ -39,7 +39,7 @@ class AddSkills extends Component {
     e.preventDefault();
     this.handleClose();
     const { open, ...data } = this.state;
-    HTTP.post('', data).then(({ data: key }) => this.props.handleAddItem(key.name, data));
+    HTTP.postItem(data).then(({ data: key }) => this.props.handleAddItem(key.name, data));
   };
 
   render() {

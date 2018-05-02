@@ -42,7 +42,7 @@ class SkillsView extends Component {
   state = null;
 
   componentDidMount() {
-    HTTP.get(this.props.match.params.id).then(response => this.setState({ ...response.data }));
+    HTTP.getItem(this.props.match.params.id).then(response => this.setState({ ...response.data }));
   }
 
   mapData = () => {
@@ -55,11 +55,11 @@ class SkillsView extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { open, ...data } = this.state;
-    HTTP.put(this.props.match.params.id, data);
+    HTTP.editItem(this.props.match.params.id, data);
   };
 
   handleDelete = () =>
-    HTTP.delete(this.props.match.params.id).then(() => this.props.history.push('/'));
+    HTTP.deleteItem(this.props.match.params.id).then(() => this.props.history.push('/'));
 
   render() {
     return this.state ? (

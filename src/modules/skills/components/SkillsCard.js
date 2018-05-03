@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
 import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';

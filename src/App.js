@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import Route from 'react-router-dom/Route';
 import CssBaseline from 'material-ui/CssBaseline';
 import styled from 'styled-components';
 

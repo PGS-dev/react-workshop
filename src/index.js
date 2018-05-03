@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import BrowserRouter from 'react-router-dom/BrowserRouter';
 import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import deepOrange from 'material-ui/colors/deepOrange';
 

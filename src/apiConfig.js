@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// authentication token is set globally in App.js during login process
 const axiosInstance = axios.create({});
 
 const urlTransform = (id = '') => `${id}.json`;
@@ -13,8 +12,9 @@ const postItem = data => axiosInstance.post(urlTransform(), data);
 
 const editItem = (id, data) => axiosInstance.put(urlTransform(id), data);
 
-const deleteItem = id => axiosInstance.put(urlTransform(id));
+const deleteItem = id => axiosInstance.delete(urlTransform(id));
 
+// authentication token is set globally in App.js during login process
 const setDefaults = (uid, token) => {
   axiosInstance.defaults.baseURL = `https://react-pgs-workshop.firebaseio.com/${uid}`;
   axiosInstance.defaults.params = { auth: token };

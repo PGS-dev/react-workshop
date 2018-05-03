@@ -27,7 +27,7 @@ class App extends Component {
       if (user) {
         auth.currentUser.getIdToken(true).then((token) => {
           HTTP.setDefaults(user.uid, token);
-          this.setState({ userEmail: user.email, isAuthFinished: true });
+          this.setState({ isAuthFinished: true, userEmail: user.email });
         });
       } else {
         this.setState({ isAuthFinished: true, userEmail: null });

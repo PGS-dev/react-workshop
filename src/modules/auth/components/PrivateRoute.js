@@ -5,6 +5,7 @@ import { Route, Redirect } from 'react-router-dom';
 const propTypes = {
   component: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
+  location: PropTypes.object,
 };
 
 function PrivateRoute({ component: Component, isAuthenticated, ...rest }) {

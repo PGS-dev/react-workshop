@@ -10,7 +10,7 @@ import { Formik } from 'formik';
 import { auth } from '../../../firebase';
 
 const StyledForm = styled.form`
-  max-width: 400px;
+  width: 300px;
   margin: 0 auto;
   height: 100%;
   display: flex;

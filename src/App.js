@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import HTTP from './apiConfig';
 import { auth } from './firebase';
 import Header from './modules/header';
-import { List, SkillsView } from './modules/skills';
+import { SkillsList, SkillsView } from './modules/skills';
 import { PrivateRoute, Login } from './modules/auth';
 
 const StyledMain = styled.main`
@@ -14,6 +14,8 @@ const StyledMain = styled.main`
   margin: 0 auto;
   max-width: 1080px;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 `;
 
 class App extends Component {
@@ -46,7 +48,7 @@ class App extends Component {
               exact
               path="/"
               isAuthenticated={!!this.state.userEmail}
-              component={List}
+              component={SkillsList}
             />
             <PrivateRoute
               exact

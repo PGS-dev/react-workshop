@@ -5,20 +5,20 @@ import Typography from 'material-ui/Typography';
 import { CircularProgress } from 'material-ui/Progress';
 
 import HTTP from '../../../apiConfig';
-import SkillsRadar from './SkillsRadar2';
+import SkillsRadar from './SkillsRadar';
 import SkillsForm from './SkillsForm';
 
 const Container = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 100%;
+  flex: 1;
 `;
 
 const ItemContainer = styled.div`
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  align-items: center;
   height: 100%;
   width: ${p => `${p.width}%`};
 `;
@@ -68,7 +68,7 @@ class SkillsView extends Component {
           {this.state.name} {this.state.lastName}
         </StyledTitle>
         <Container>
-          <ItemContainer width={30}>
+          <ItemContainer width={25}>
             <SkillsForm
               handleSubmit={this.handleSubmit}
               handleTextField={this.handleTextField}
@@ -78,7 +78,7 @@ class SkillsView extends Component {
               isColumn
             />
           </ItemContainer>
-          <ItemContainer width={70}>
+          <ItemContainer width={75}>
             <SkillsRadar data={this.mapData()} />
           </ItemContainer>
         </Container>

@@ -1,60 +1,67 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { VictoryArea, VictoryChart, VictoryLabel, VictoryPolarAxis, VictoryTheme } from 'victory';
+import pink from 'material-ui/colors/pink';
+import { ResponsiveRadar } from '@nivo/radar';
 
-class App extends React.PureComponent {
-  state = {
-    data: this.processData(this.props.data),
-  };
+const theme = {
+  axis: {
+    textColor: '#eee',
+    fontSize: '16px',
+    tickColor: '#eee',
+  },
+  grid: {
+    stroke: '#888',
+    strokeWidth: 1,
+  },
+  dots: {
+    fontSize: '16px',
+    textColor: '#eee',
+  },
+};
 
-  processData = data => Object.keys(data).map(key => ({ x: key, y: parseFloat(data[key]) }));
+const propTypes = {
+  data: PropTypes.objectOf(PropTypes.string).isRequired,
+};
 
-  render() {
-    return (
-      <VictoryChart
-        polar
-        theme={VictoryTheme.material}
-        domain={{ y: [0, 300] }}
-        animate={{ duration: 250 }}
-      >
-        {Object.keys(this.state.data).map((key, i) => (
-          <VictoryPolarAxis
-            dependentAxis
-            style={{
-              axisLabel: { padding: 20, fill: 'white', opacity: 0.5, stroke: 'transparent' },
-              axis: { stroke: 'none' },
-              grid: { stroke: 'white', strokeWidth: 0.25, opacity: 0.5 },
-            }}
-            tickLabelComponent={
-              <VictoryLabel
-                labelPlacement="vertical"
-                style={{ fontSize: 10, fill: 'white', opacity: 0.5 }}
-              />
-            }
-            labelPlacement="perpendicular"
-            label={key}
-            key={key}
-            axisValue={i + 1}
-            tickFormat={t => t}
-            tickValues={[50, 100, 150, 200, 250, 300]}
-          />
-        ))}
-        <VictoryPolarAxis
-          labelPlacement="parallel"
-          tickFormat={() => ''}
-          style={{
-            axis: { stroke: 'none' },
-            grid: { stroke: 'white', opacity: 0.4 },
-          }}
-        />
-        <VictoryArea
-          interpolation="catmullRom"
-          style={{ data: { fill: '#c43a31', fillOpacity: 0.5, strokeWidth: 1 } }}
-          data={this.processData(this.props.data)}
-        />
-      </VictoryChart>
-    );
-  }
+function SkillsRadar({ data }) {
+  const radarData = Object.keys(data).map(key => ({ label: key, result: data[key] }));
+  return (
+    <ResponsiveRadar
+      data={radarData}
+      keys={['result']}
+      indexBy="label"
+      margin={{
+        top: 100,
+        right: 100,
+        bottom: 100,
+        left: 100,
+      }}
+      curve="catmullRomClosed"
+      borderWidth={2}
+      borderColor="inherit"
+      gridLevels={10}
+      gridShape="circular"
+      gridLabelOffset={36}
+      enableDots
+      dotSize={8}
+      dotColor="inherit"
+      dotBorderWidth={0}
+      dotBorderColor="#ffffff"
+      enableDotLabel
+      dotLabel="value"
+      dotLabelYOffset={-20}
+      colors={[pink[500]]}
+      colorBy="key"
+      fillOpacity={0.6}
+      animate
+      motionStiffness={90}
+      motionDamping={15}
+      tickValues={[25, 50, 100]}
+      isInteractive
+      theme={theme}
+    />
+  );
 }
 
-export default App;
+SkillsRadar.propTypes = propTypes;
+export default SkillsRadar;

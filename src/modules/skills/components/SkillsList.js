@@ -23,7 +23,7 @@ const StyledTextField = styled(TextField)`
   flex: 1;
 `;
 
-class List extends Component {
+class SkillsList extends Component {
   state = {
     data: null,
     filter: '',
@@ -56,4 +56,4 @@ class List extends Component {
   }
 }
 
-export default List;
+export default SkillsList;

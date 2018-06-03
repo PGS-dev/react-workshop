@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import deepOrange from '@material-ui/core/colors/deepOrange';
+import { Header } from './modules/layout';
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -10,11 +11,18 @@ const darkTheme = createMuiTheme({
 });
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      userEmail: 'maximr@max.pl'
+    }
+  }
   render() {
     return (
       <MuiThemeProvider theme={darkTheme}>
-        <div className="App">
-        </div>
+      <Header userEmail={this.state.userEmail} />
+        <div className="App"></div>
       </MuiThemeProvider>
       
     );

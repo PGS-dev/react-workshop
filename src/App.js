@@ -3,7 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import styled from 'styled-components';
 import { Header } from './modules/layout';
-import { SkillsCard, AddSkills, SkillsList } from './modules/skills';
+import { SkillsList } from './modules/skills';
 
 const StyledMain = styled.main`
   padding: 60px 10px 10px;

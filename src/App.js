@@ -1,9 +1,16 @@
-import React, { Component, Fragment } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-
-import styled from 'styled-components';
+import React, { Component } from 'react';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import deepOrange from '@material-ui/core/colors/deepOrange';
 import { Header } from './modules/layout';
-import { SkillsList } from './modules/skills';
+import { SkillCard } from './modules/skills'; 
+import styled from 'styled-components';
+
+const darkTheme = createMuiTheme({
+  palette: {
+    type: 'dark',
+    primary: deepOrange,
+  },
+});
 
 const StyledMain = styled.main`
   padding: 60px 10px 10px;
@@ -15,27 +22,38 @@ const StyledMain = styled.main`
 `;
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+
     this.state = {
-      data: [],
-    };
-    this.handleAddItem = this.handleAddItem.bind(this);
+      userEmail: 'maximr@max.pl',
+      values: [
+        {
+          name: 'Maxim', 
+          lastName: 'Rachkovskiy', 
+          HTML5: '123', 
+          CSS: '234', 
+          JavaScript: '345', 
+          ReactJS: '456'
+        },{
+          name: 'Jan', 
+          lastName: 'Kowalski', 
+          HTML5: '122', 
+          CSS: '233', 
+          JavaScript: '344', 
+          ReactJS: '455'
+        }
+      ]
+    }
   }
-
-  handleAddItem(data) {
-    this.setState({ data: [...this.state.data, data] });
-  }
-
   render() {
     return (
-      <Fragment>
-        <CssBaseline />
-        <Header userEmail="maciek@maciek.pl" />
+      <MuiThemeProvider theme={darkTheme}>
+        <Header userEmail={this.state.userEmail} />
         <StyledMain>
-          <SkillsList data={this.state.data} handleAddItem={this.handleAddItem} />
+          {this.state.values.map(v => <SkillCard values={v} />)}
         </StyledMain>
-      </Fragment>
+      </MuiThemeProvider>
     );
   }
 }

@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
 
 const StyledHeader = styled(Paper)`
-  && {
+&& {
     background-color: rgba(33, 33, 33, 0.8);
     position: fixed;
     width: 100%;
@@ -25,6 +25,7 @@ const Container = styled.div`
 const StyledTitle = styled(Typography)`
   background: -webkit-linear-gradient(135deg, #f05a28 0%, #e80a89 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 `;
 
@@ -36,21 +37,20 @@ const StyledUsername = styled(Typography)`
 `;
 
 const propTypes = {
-  userEmail: PropTypes.string,
-};
-
-function Header({ userEmail }) {
-  return (
-    <StyledHeader square component="header">
-      <Container>
-        <StyledTitle variant="headline">React Workshop</StyledTitle>
-        {userEmail && (
-          <StyledUsername variant="subheading">Hi, {userEmail.split('@')[0]}!</StyledUsername>
-        )}
-      </Container>
-    </StyledHeader>
-  );
+    userEmail: PropTypes.string
 }
 
+const Header = ({userEmail}) => {
+    return (
+        <StyledHeader>
+            <Container>
+                <StyledTitle variant="headline">React Workshop</StyledTitle>
+                {userEmail && (
+                    <StyledUsername variant="subheading">Hi, {userEmail.split('@')[0]}!</StyledUsername>
+                )}
+            </Container>
+        </StyledHeader>
+    )
+}
 Header.propTypes = propTypes;
 export default Header;

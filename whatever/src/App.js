@@ -4,6 +4,7 @@ import deepOrange from '@material-ui/core/colors/deepOrange';
 import { Header } from './modules/layout';
 import { SkillCard, AddSkills } from './modules/skills'; 
 import styled from 'styled-components';
+import { Route, BrowserRouter } from 'react-router-dom';
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -54,13 +55,15 @@ class App extends Component {
 
   render() {
     return (
-      <MuiThemeProvider theme={darkTheme}>
-        <Header userEmail={this.state.userEmail} />
-        <StyledMain>
-          <AddSkills handleAddItem={this.handleAddItem} />
-          {this.state.values.map(v => <SkillCard values={v} />)}
-        </StyledMain>
-      </MuiThemeProvider>
+      <BrowserRouter>
+        <MuiThemeProvider theme={darkTheme}>
+          <Header userEmail={this.state.userEmail} />
+          <StyledMain>
+            <AddSkills handleAddItem={this.handleAddItem} />
+            <Route exact path="/" render={() => this.state.values.map(v => <SkillCard values={v} />)}/>
+          </StyledMain>
+        </MuiThemeProvider>
+      </BrowserRouter>
     );
   }
 }

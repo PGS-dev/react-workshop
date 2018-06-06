@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import { Header } from './modules/layout';
-import { SkillCard } from './modules/skills'; 
+import { SkillCard, AddSkills } from './modules/skills'; 
 import styled from 'styled-components';
 
 const darkTheme = createMuiTheme({
@@ -45,12 +45,19 @@ class App extends Component {
         }
       ]
     }
+    this.handleAddItem = this.handleAddItem.bind(this);
   }
+
+  handleAddItem(values) {
+    this.setState({ values: [...this.state.values, values] });
+  }
+
   render() {
     return (
       <MuiThemeProvider theme={darkTheme}>
         <Header userEmail={this.state.userEmail} />
         <StyledMain>
+          <AddSkills handleAddItem={this.handleAddItem} />
           {this.state.values.map(v => <SkillCard values={v} />)}
         </StyledMain>
       </MuiThemeProvider>

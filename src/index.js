@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import BrowserRouter from 'react-router-dom/BrowserRouter';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 
@@ -15,9 +16,11 @@ const theme = createMuiTheme({
 });
 
 ReactDOM.render(
-  <MuiThemeProvider theme={theme}>
-    <App />
-  </MuiThemeProvider>,
+  <BrowserRouter>
+    <MuiThemeProvider theme={theme}>
+      <App />
+    </MuiThemeProvider>
+  </BrowserRouter>,
   document.getElementById('root'),
 );
 registerServiceWorker();

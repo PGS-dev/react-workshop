@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
@@ -40,13 +40,14 @@ class AddSkills extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.handleClose();
+    const id = Math.floor(Math.random() * 100000000).toString();
     const { open, ...data } = this.state;
-    this.props.handleAddItem(data);
+    this.props.handleAddItem({ ...data, id });
   };
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <StyledButton onClick={this.handleOpen} color="primary" variant="raised">
           Add new
         </StyledButton>
@@ -69,7 +70,7 @@ class AddSkills extends Component {
             />
           </DialogContent>
         </Dialog>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }

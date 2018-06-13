@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const CardImage = styled.div`
   background: url('https://cdn-images-1.medium.com/max/800/0*QKJemZKR6vA6hMAj.png');
@@ -56,18 +57,20 @@ function SkillsCard({ values }) {
   const { name, lastName, HTML5, CSS, JavaScript, ReactJS } = values;
 
   return (
-    <Card>
-      <Typography variant="headline" align="center">
-        {name} {lastName}
-      </Typography>
-      <SkillsContainer>
-        <Typography>HTML: {HTML5}</Typography>
-        <Typography>CSS: {CSS}</Typography>
-        <Typography>JS: {JavaScript}</Typography>
-        <Typography>ReactJS: {ReactJS}</Typography>
-      </SkillsContainer>
-      <CardImage />
-    </Card>
+    <Link to={`/results/${lastName}`}>
+      <Card>
+        <Typography variant="headline" align="center">
+          {name} {lastName}
+        </Typography>
+        <SkillsContainer>
+          <Typography>HTML: {HTML5}</Typography>
+          <Typography>CSS: {CSS}</Typography>
+          <Typography>JS: {JavaScript}</Typography>
+          <Typography>ReactJS: {ReactJS}</Typography>
+        </SkillsContainer>
+        <CardImage />
+      </Card>
+    </Link>
   );
 }
 SkillsCard.propTypes = propTypes;

@@ -61,6 +61,7 @@ class App extends Component {
           <StyledMain>
             <AddSkills handleAddItem={this.handleAddItem} />
             <Route exact path="/" render={() => this.state.values.map(v => <SkillCard values={v} />)}/>
+            <Route exact path="/results/:id" render={({match}) => <h1>FAsdasd: {match.params.id}</h1>}/>
           </StyledMain>
         </MuiThemeProvider>
       </BrowserRouter>

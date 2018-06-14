@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
@@ -51,27 +51,30 @@ const SkillsContainer = styled.div`
   }
 `;
 
-function SkillsCard({ values }) {
-  const { name, lastName, HTML5, CSS, JavaScript, ReactJS } = values;
-
-  return (
-    <Card>
-      <Typography variant="headline" align="center">
-        {name} {lastName}
-      </Typography>
-      <SkillsContainer>
-        <Typography>HTML: {HTML5}</Typography>
-        <Typography>CSS: {CSS}</Typography>
-        <Typography>JS: {JavaScript}</Typography>
-        <Typography>ReactJS: {ReactJS}</Typography>
-      </SkillsContainer>
-      <CardImage />
-    </Card>
-  );
-}
-
-SkillsCard.propTypes = {
+const propTypes = {
   values: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
+class SkillsCard extends PureComponent {
+  render() {
+    const { values } = this.props;
+    const { name, lastName, HTML5, CSS, JavaScript, ReactJS } = values;
+
+    return (
+      <Card>
+        <Typography variant="headline" align="center">
+          {name} {lastName}
+        </Typography>
+        <SkillsContainer>
+          <Typography>HTML: {HTML5}</Typography>
+          <Typography>CSS: {CSS}</Typography>
+          <Typography>JS: {JavaScript}</Typography>
+          <Typography>ReactJS: {ReactJS}</Typography>
+        </SkillsContainer>
+        <CardImage />
+      </Card>
+    );
+  }
+}
+SkillsCard.propTypes = propTypes;
 export default SkillsCard;

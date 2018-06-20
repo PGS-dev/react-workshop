@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Route from 'react-router-dom/Route';
-import Switch from 'react-router-dom/Switch';
 import styled from 'styled-components';
 
+import { auth } from './firebase';
 import { Header } from './modules/layout';
+import { Login, PrivateRoute } from './modules/auth';
 import { SkillsList, SkillsView } from './modules/skills';
 
 const StyledMain = styled.main`
@@ -21,8 +22,23 @@ class App extends Component {
     super(props);
     this.state = {
       data: [],
+      userEmail: null,
+      isAuthFinished: false,
     };
     this.handleAddItem = this.handleAddItem.bind(this);
+  }
+
+  componentDidMount() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        auth.currentUser.getIdToken(true).then((token) => {
+          // HTTP.setDefaults(user.uid, token);
+          this.setState({ isAuthFinished: true, userEmail: user.email });
+        });
+      } else {
+        this.setState({ isAuthFinished: true, userEmail: null });
+      }
+    });
   }
 
   handleAddItem(data) {
@@ -33,22 +49,32 @@ class App extends Component {
     return (
       <Fragment>
         <CssBaseline />
-        <Header userEmail="maciek@maciek.pl" />
-        <StyledMain>
-          <Switch>
-            <Route
+        <Header userEmail={this.state.userEmail} />
+        {this.state.isAuthFinished ? (
+          <StyledMain>
+            <PrivateRoute
               path="/"
               exact
-              render={() => (
-                <SkillsList data={this.state.data} handleAddItem={this.handleAddItem} />
-              )}
+              data={this.state.data}
+              isAuthenticated={!!this.state.userEmail}
+              handleAddItem={this.handleAddItem}
+              component={SkillsList}
+            />
+            <PrivateRoute
+              exact
+              path="/result/:id"
+              isAuthenticated={!!this.state.userEmail}
+              component={SkillsView}
+              data={this.state.data}
             />
             <Route
-              path="/result/:id"
-              render={({ match }) => <SkillsView data={this.state.data} match={match} />}
+              path="/login"
+              render={({ location }) => (
+                <Login location={location} isAuthenticated={!!this.state.userEmail} />
+              )}
             />
-          </Switch>
-        </StyledMain>
+          </StyledMain>
+        ) : null}
       </Fragment>
     );
   }

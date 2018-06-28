@@ -1,8 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
 
 const CardImage = styled.div`
   background: url('https://cdn-images-1.medium.com/max/800/0*QKJemZKR6vA6hMAj.png');
@@ -58,21 +63,23 @@ const propTypes = {
 class SkillsCard extends PureComponent {
   render() {
     const { values } = this.props;
-    const { name, lastName, HTML5, CSS, JavaScript, ReactJS } = values;
+    const { name, lastName, HTML5, CSS, JavaScript, ReactJS, id } = values;
 
     return (
-      <Card>
-        <Typography variant="headline" align="center">
-          {name} {lastName}
-        </Typography>
-        <SkillsContainer>
-          <Typography>HTML: {HTML5}</Typography>
-          <Typography>CSS: {CSS}</Typography>
-          <Typography>JS: {JavaScript}</Typography>
-          <Typography>ReactJS: {ReactJS}</Typography>
-        </SkillsContainer>
-        <CardImage />
-      </Card>
+      <StyledLink to={`result/${id}`}>
+        <Card>
+          <Typography variant="headline" align="center">
+            {name} {lastName}
+          </Typography>
+          <SkillsContainer color="red">
+            <Typography>HTML: {HTML5}</Typography>
+            <Typography>CSS: {CSS}</Typography>
+            <Typography>JS: {JavaScript}</Typography>
+            <Typography>ReactJS: {ReactJS}</Typography>
+          </SkillsContainer>
+          <CardImage />
+        </Card>
+      </StyledLink>
     );
   }
 }

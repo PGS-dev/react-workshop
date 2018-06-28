@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Link from 'react-router-dom/Link';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
@@ -28,6 +29,10 @@ const StyledTitle = styled(Typography)`
   -webkit-text-fill-color: transparent;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
 const StyledUsername = styled(Typography)`
   && {
     margin-left: auto;
@@ -43,7 +48,9 @@ function Header({ userEmail }) {
   return (
     <StyledHeader square component="header">
       <Container>
-        <StyledTitle variant="headline">React Workshop</StyledTitle>
+        <StyledLink to="/">
+          <StyledTitle variant="headline">React Workshop</StyledTitle>
+        </StyledLink>
         {userEmail && (
           <StyledUsername variant="subheading">Hi, {userEmail.split('@')[0]}!</StyledUsername>
         )}

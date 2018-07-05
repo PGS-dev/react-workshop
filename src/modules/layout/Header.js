@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Link from 'react-router-dom/Link';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+
+import { auth } from '../../firebase';
 
 const StyledHeader = styled(Paper)`
   && {
@@ -54,6 +57,9 @@ function Header({ userEmail }) {
         {userEmail && (
           <StyledUsername variant="subheading">Hi, {userEmail.split('@')[0]}!</StyledUsername>
         )}
+        <Button color="primary" disabled={!userEmail} onClick={() => auth.signOut()}>
+          Log Out
+        </Button>
       </Container>
     </StyledHeader>
   );
